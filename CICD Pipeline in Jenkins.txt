@@ -1,0 +1,143 @@
+
+
+Project Title:
+Create a CI/CD Pipeline in Jenkins and Integrate GitHub for Remote Repository
+
+Project Description:
+This project aims to set up a Continuous Integration and Continuous Deployment (CI/CD) pipeline using Jenkins. 
+The pipeline will be configured to pull code from a remote GitHub repository, build the application, run automated tests, 
+and deploy it to a staging or production environment. 
+By automating these processes, the project ensures seamless software delivery with minimal manual intervention, enhancing efficiency 
+and reliability in software development.
+
+
+
+Project Steps:
+1. Install and Configure Jenkins
+Install Jenkins on a server (Linux)
+Start the Jenkins service and set up the initial admin credentials.
+Install necessary plugins.
+
+2. Set Up GitHub Integration
+Create a GitHub repository to store the project code.
+Generate a personal access token (PAT) for Jenkins to authenticate with GitHub.
+Add Jenkins SSH credentials or webhook to trigger builds on code changes.
+
+
+3. Create a Jenkins Job/Pipeline
+Open Jenkins and create a new pipeline project.
+Configure the job to pull code from the GitHub repository.
+
+
+4. Define the Jenkins file for CI/CD Pipeline
+Stage 1: Clone source code from GitHub.
+Stage 2: Build the application using a relevant build tool 
+Stage 3: Run unit tests and code analysis.
+Stage 4: Deploy the application to a staging or production environment.
+
+5. Configure Webhooks for Automated Builds
+Enable GitHub webhooks to trigger Jenkins builds on code commits.
+Test the webhook integration by pushing a change to the repository.
+
+
+
+6. run job and Deploy Project
+Run test builds to ensure successful execution.
+Deploy the application to a test/staging environment.
+Validate functionality and fix any pipeline issues.
+
+
+7. Automate Deployment to Production
+Implement blue-green or rolling deployments for zero downtime.
+
+
+
+This project will provide a fully functional CI/CD pipeline that automates software integration and deployment, 
+improving overall software development efficiency.
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Project start
+
+
+sudo apt-get update
+sudo apt-get upgrade -y
+
+sudo apt install openjdk-17-jre-headless
+java -version
+
+
+curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+
+
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+
+
+sudo apt-get update
+sudo apt-get install -y Jenkins
+
+
+sudo systemctl start Jenkins
+
+
+sudo systemctl enable Jenkins
+
+
+Install Plugin Publish over SSH
+
+Copy paste .pem Key
+
+add ssh server 
+host public IP
+user id  ubuntu
+directory /var/www/html
+
+test
+success
+apply save
+
+
+
+new item / freestyle / ok
+
+ADD GitHub project URL (https://github.com/tassdaq/Project4)
+
+
+Build Triggers
+GitHub hook trigger for GITScm polling
+
+----------------------------------------------------
+
+GitHub Account
+
+Webhook
+http://3.84.83.249:8080/github-webhook/
+application json
+
+----------------------------------------------------
+Build Environment
+
+Send files or execute commands over SSH after the build runs
+
+**/*.html,**/*.css,**/*.*
+
+
+
+apply save
+
+build now
+
+on webserver /var/www/
+
+sudo chmod 777 html
+
+build now again
+
+
+
+
+
